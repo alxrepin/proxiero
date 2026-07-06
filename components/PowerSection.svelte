@@ -24,11 +24,7 @@ async function toggle() {
   <div class="power-caption">
     {#if app.active}
       <span class="active-name">{proxyTitle(app.active)}</span>
-      <span class="active-sub">
-        <span class="state-word" class:on={app.isOn}>
-          {app.isOn ? t('connected') : t('disconnected')}
-        </span>
-        · {SCHEME_LABELS[app.active.scheme]} · {app.active.host}:{app.active.port}
+      <span class="active-sub">{SCHEME_LABELS[app.active.scheme]} · {app.active.host}:{app.active.port}
       </span>
     {:else}
       <span class="active-name muted">{t('noProxySelected')}</span>
