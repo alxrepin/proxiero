@@ -67,4 +67,3 @@ function pingClass(r: PingStatus): string {
     </span>
   </button>
 </li>
-

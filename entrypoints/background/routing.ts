@@ -1,7 +1,5 @@
 import type { BgContext } from './context';
 
-// Минимальные типы под используемые части proxy API: типы браузера
-// не покрывают одновременно Firefox proxy.onRequest и Chrome proxy.settings.
 interface FirefoxProxyInfo {
   type: string;
   host?: string;
@@ -35,11 +33,6 @@ function isLocalUrl(url: string): boolean {
   }
 }
 
-/**
- * Firefox: proxy.onRequest решает судьбу каждого запроса на лету —
- * в отличие от proxy.settings не требует от пользователя включать
- * расширение в приватных окнах.
- */
 export function setupFirefoxRouting(ctx: BgContext): void {
   proxyApi().onRequest.addListener(
     async (details) => {
@@ -62,7 +55,6 @@ export function setupFirefoxRouting(ctx: BgContext): void {
   );
 }
 
-/** Chrome: глобальные настройки прокси через chrome.proxy.settings. */
 export async function applyChromeProxy(ctx: BgContext): Promise<void> {
   const { settings } = proxyApi();
   const p = ctx.activeProxy();

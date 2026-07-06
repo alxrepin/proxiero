@@ -10,8 +10,6 @@ export default defineConfig({
       'proxy',
       'storage',
       'webRequest',
-      // Ответ на запрос авторизации прокси: в Firefox нужен blocking-режим,
-      // в Chrome MV3 — отдельное разрешение webRequestAuthProvider.
       ...(browser === 'firefox' ? ['webRequestBlocking'] : ['webRequestAuthProvider']),
     ],
     host_permissions: ['<all_urls>'],

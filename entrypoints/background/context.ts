@@ -2,11 +2,8 @@ import { DEFAULT_STATE, loadState } from '@/utils/storage';
 import type { AppState, ProxyEntry } from '@/utils/types';
 
 export interface BgContext {
-  /** Разрешается после первичной загрузки состояния из storage. */
   ready: Promise<void>;
-  /** Активный прокси или null, если выключено/не выбрано. */
   activeProxy(): ProxyEntry | null;
-  /** Подписка на изменения рабочего состояния (черновик формы игнорируется). */
   onStateChange(cb: () => void): void;
 }
 

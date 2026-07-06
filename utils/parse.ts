@@ -8,10 +8,6 @@ export interface ParsedProxyInput {
   password?: string;
 }
 
-/**
- * Разбирает строку вида "socks5://user:pass@1.2.3.4:1080" или "host:8080"
- * на составные части. Отсутствующие части не возвращаются.
- */
 export function parseProxyString(raw: string): ParsedProxyInput {
   let v = raw.trim();
   const result: ParsedProxyInput = { host: v };

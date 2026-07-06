@@ -2,15 +2,6 @@ import type { ProxyEntry } from './types';
 
 export type PingResult = { ok: true; ms: number } | { ok: false; ms: null };
 
-/**
- * Проверка доступности прокси из попапа. Расширение не может открыть
- * «сырой» TCP-сокет, поэтому меряем время ответа порта через fetch:
- *  - ответ получен → сервер жив, ms — задержка;
- *  - быстрая ошибка → для HTTP-прокси это закрытый порт (офлайн),
- *    для SOCKS/HTTPS порт мог принять соединение, но не понять HTTP —
- *    считаем живым и показываем время;
- *  - таймаут → офлайн.
- */
 export async function pingProxy(p: ProxyEntry, timeoutMs = 4000): Promise<PingResult> {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), timeoutMs);

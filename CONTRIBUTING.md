@@ -5,7 +5,7 @@ Thanks for considering a contribution!
 ## Getting started
 
 ```bash
-git clone https://github.com/alexrepinru/proxiero.git
+git clone https://github.com/alxrepin/proxiero.git
 cd proxiero
 npm install
 npm run dev            # Chrome with HMR

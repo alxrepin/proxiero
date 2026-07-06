@@ -96,4 +96,3 @@ async function submit(e: SubmitEvent) {
     <button type="submit" class="primary">{form.editingId ? t('update') : t('save')}</button>
   </div>
 </form>
-

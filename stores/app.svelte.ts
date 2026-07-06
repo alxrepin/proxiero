@@ -1,8 +1,6 @@
 import { DEFAULT_STATE, loadState, saveState } from '@/utils/storage';
 import type { AppState, ProxyEntry } from '@/utils/types';
 
-// Единственный источник правды о прокси в попапе. Пишет изменения
-// в storage.local — применяет их фоновый скрипт через storage.onChanged.
 const state = $state<AppState>({ ...DEFAULT_STATE });
 
 export const app = {
@@ -26,7 +24,6 @@ export const app = {
     Object.assign(state, await loadState());
   },
 
-  /** Переключает прокси. Возвращает false, если включать нечего (список пуст). */
   async toggle(): Promise<boolean> {
     if (!state.enabled && !this.active) {
       if (state.proxies.length === 0) return false;
@@ -54,7 +51,6 @@ export const app = {
     await saveState(patch);
   },
 
-  /** Добавляет новый сервер или обновляет существующий (по id). */
   async upsert(entry: ProxyEntry): Promise<void> {
     const exists = state.proxies.some((p) => p.id === entry.id);
     if (exists) {

@@ -2,7 +2,6 @@ import { clearDraft, type FormDraft, loadDraft, saveDraft } from '@/utils/storag
 import type { ProxyEntry, ProxyScheme } from '@/utils/types';
 import { app } from './app.svelte';
 
-// Реактивные поля формы (для bind:value) и её видимость.
 export const form = $state({
   visible: false,
   editingId: null as string | null,
@@ -18,7 +17,6 @@ export const form = $state({
 let ready = $state(false);
 
 export const formActions = {
-  /** Черновик восстановлен — можно начинать автосохранение. */
   get ready() {
     return ready;
   },
@@ -27,7 +25,6 @@ export const formActions = {
     form.visible = true;
   },
 
-  /** «Назад»: форма скрывается, но черновик с введённым остаётся. */
   hide(): void {
     form.visible = false;
   },
@@ -44,12 +41,10 @@ export const formActions = {
     form.visible = true;
   },
 
-  /** Сервер удалён — редактирование превращается в добавление. */
   detachEditing(id: string): void {
     if (form.editingId === id) form.editingId = null;
   },
 
-  /** «Отмена» или успешное сохранение: полный сброс вместе с черновиком. */
   reset(): void {
     form.name = form.host = form.port = form.user = form.pass = '';
     form.scheme = 'http';

@@ -5,8 +5,6 @@ export type Lang = 'en' | 'ru';
 
 const dicts: Record<Lang, Record<string, string>> = { en, ru };
 
-// Модульный $state: чтение в шаблонах реактивно, смена языка
-// перерисовывает весь интерфейс без перезагрузки попапа.
 let current = $state<Lang>('en');
 
 function detect(): Lang {

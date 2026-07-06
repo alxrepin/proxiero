@@ -15,8 +15,6 @@ export async function saveState(patch: Partial<AppState>): Promise<void> {
   await browser.storage.local.set(patch);
 }
 
-// Черновик формы: попап закрывается при любой потере фокуса окна,
-// поэтому введённое сохраняем на лету и восстанавливаем при открытии.
 export interface FormDraft {
   showForm: boolean;
   editingId: string | null;

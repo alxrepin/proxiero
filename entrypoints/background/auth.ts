@@ -10,7 +10,6 @@ export function setupProxyAuth(ctx: BgContext): void {
   const attempts = new Map<string, number>();
 
   const onAuthRequired: AuthListener = (details, asyncCallback) => {
-    // Firefox (blocking) ждёт возврата объекта, Chrome (asyncBlocking) — вызова колбэка.
     const respond = (r: object): object | undefined => {
       if (asyncCallback) {
         asyncCallback(r);
@@ -22,14 +21,13 @@ export function setupProxyAuth(ctx: BgContext): void {
     if (!details.isProxy || !p?.username) return respond({});
     const attempt = (attempts.get(details.requestId) ?? 0) + 1;
     attempts.set(details.requestId, attempt);
-    // Неверный пароль вызывает повторные челленджи — не зацикливаемся.
+
     if (attempt > 2) return respond({ cancel: true });
     return respond({
       authCredentials: { username: p.username, password: p.password ?? '' },
     });
   };
 
-  // Сигнатура листенера различается между MV2/MV3 — типы браузера её не описывают.
   const addAuthListener = browser.webRequest.onAuthRequired.addListener as unknown as (
     cb: AuthListener,
     filter: { urls: string[] },

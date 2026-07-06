@@ -43,4 +43,3 @@ import { t } from '@/utils/i18n.svelte';
 
 <PowerSection />
 <ProxyList />
-

@@ -16,8 +16,6 @@ onMount(async () => {
   pings.refresh(app.proxies);
 });
 
-// Автосохранение черновика формы: попап закрывается при потере
-// фокуса окна, без этого введённое в поля терялось бы.
 $effect(() => {
   const snapshot = formActions.snapshot();
   if (!formActions.ready) return;

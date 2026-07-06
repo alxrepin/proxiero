@@ -4,15 +4,15 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "author": "Alex Repin <alexrepinru@gmail.com>",
+  "author": "Alex Repin <alxrepin@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alexrepinru/proxiero.git"
+    "url": "git+https://github.com/alxrepin/proxiero.git"
   },
-  "homepage": "https://github.com/alexrepinru/proxiero#readme",
+  "homepage": "https://github.com/alxrepin/proxiero#readme",
   "bugs": {
-    "url": "https://github.com/alexrepinru/proxiero/issues"
+    "url": "https://github.com/alxrepin/proxiero/issues"
   },
   "keywords": [
     "browser-extension",

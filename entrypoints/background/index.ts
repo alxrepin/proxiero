@@ -23,8 +23,6 @@ export default defineBackground(() => {
 
   ctx.onStateChange(() => void applyAll());
 
-  // onStartup покрывает перезапуск браузера, onInstalled — обновление
-  // расширения; прямой вызов — пробуждение сервис-воркера в Chrome.
   browser.runtime.onStartup.addListener(() => void applyAll());
   browser.runtime.onInstalled.addListener(() => void applyAll());
   void applyAll();

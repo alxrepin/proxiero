@@ -4,12 +4,12 @@
 
 # Proxiero
 
-**One-click proxy switching for Chrome, Firefox and Zen Browser.**
+**One-click proxy switching for Chrome and Firefox**
 
 Keep a list of proxy servers, check their latency, toggle the active one with a single click —
 and have it survive browser restarts.
 
-[![CI](https://github.com/alexrepinru/proxiero/actions/workflows/ci.yml/badge.svg)](https://github.com/alexrepinru/proxiero/actions/workflows/ci.yml)
+[![CI](https://github.com/alxrepin/proxiero/actions/workflows/ci.yml/badge.svg)](https://github.com/alxrepin/proxiero/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 ![Chrome MV3](https://img.shields.io/badge/Chrome-MV3-4285F4?logo=googlechrome&logoColor=white)
 ![Firefox MV2](https://img.shields.io/badge/Firefox-MV2-FF7139?logo=firefoxbrowser&logoColor=white)
@@ -23,7 +23,6 @@ and have it survive browser restarts.
 
 ## Features
 
-- **One big button** — toggle the active proxy on/off; the toolbar icon turns green/gray to match.
 - **Server list** — HTTP, HTTPS, SOCKS4, SOCKS5, with optional username/password auth.
 - **Latency check** — every server is pinged when the popup opens; status and ms shown inline.
 - **Survives restarts** — state is stored locally and re-applied on browser startup.
@@ -38,7 +37,7 @@ and have it survive browser restarts.
 Not yet published to the stores — build from source:
 
 ```bash
-git clone https://github.com/alexrepinru/proxiero.git
+git clone https://github.com/alxrepin/proxiero.git
 cd proxiero
 npm install
 npm run build            # Chrome  → .output/chrome-mv3/
@@ -100,9 +99,6 @@ scripts/gen-icons.mjs    # dependency-free PNG icon generator
 
 ## Limitations
 
-- **Ping is a heuristic.** Extensions cannot open raw TCP sockets, so latency is measured by
-  timing a `fetch` to the proxy port. Accurate for HTTP proxies; for SOCKS a fast connection
-  reset is indistinguishable from an open-but-non-HTTP port.
 - While a proxy is active, pings to the other servers go through it.
 - In Chrome, another extension with higher priority (e.g. a VPN) can take over proxy control.
 - Passwords are stored in `storage.local` unencrypted — same as most extensions of this kind.
@@ -120,4 +116,4 @@ Issues and PRs are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
-[MIT](LICENSE) © Alex Repin
+[MIT](LICENSE) © Alexander Repin
