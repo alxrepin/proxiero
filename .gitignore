@@ -1,0 +1,10 @@
+node_modules/
+.output/
+.wxt/
+.idea/
+.vscode/
+stats.html
+stats-*.json
+.env
+.env.*
+.DS_Store

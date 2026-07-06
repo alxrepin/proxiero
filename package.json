@@ -1,0 +1,48 @@
+{
+  "name": "proxiero",
+  "description": "One-click proxy switching extension for Chrome, Firefox and Zen Browser",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "author": "Alex Repin <alexrepinru@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexrepinru/proxiero.git"
+  },
+  "homepage": "https://github.com/alexrepinru/proxiero#readme",
+  "bugs": {
+    "url": "https://github.com/alexrepinru/proxiero/issues"
+  },
+  "keywords": [
+    "browser-extension",
+    "proxy",
+    "chrome",
+    "firefox",
+    "wxt",
+    "svelte"
+  ],
+  "scripts": {
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox",
+    "dev:zen": "ZEN=1 wxt -b firefox",
+    "build": "wxt build",
+    "build:firefox": "wxt build -b firefox",
+    "zip": "wxt zip",
+    "zip:firefox": "wxt zip -b firefox",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "icons": "node scripts/gen-icons.mjs",
+    "postinstall": "wxt prepare"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.2",
+    "@sveltejs/vite-plugin-svelte": "^7.1.2",
+    "@wxt-dev/module-svelte": "^2.0.5",
+    "svelte": "^5.56.4",
+    "svelte-check": "^4.7.1",
+    "typescript": "^6.0.3",
+    "wxt": "^0.20.27"
+  }
+}

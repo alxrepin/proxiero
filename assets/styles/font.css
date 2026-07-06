@@ -1,0 +1,40 @@
+@font-face {
+  font-family: "TT Interphases Pro";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src:
+    local("TT Interphases Pro"),
+    local("TTInterphasesPro-Regular"),
+    url("/fonts/TTInterphasesPro-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "TT Interphases Pro";
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src:
+    local("TT Interphases Pro Medium"),
+    local("TTInterphasesPro-Medium"),
+    url("/fonts/TTInterphasesPro-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: "TT Interphases Pro";
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src:
+    local("TT Interphases Pro DemiBold"),
+    local("TTInterphasesPro-DemiBold"),
+    url("/fonts/TTInterphasesPro-DemiBold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "TT Interphases Pro";
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src:
+    local("TT Interphases Pro Bold"),
+    local("TTInterphasesPro-Bold"),
+    url("/fonts/TTInterphasesPro-Bold.woff2") format("woff2");
+}

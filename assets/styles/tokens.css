@@ -1,0 +1,38 @@
+:root {
+  --bg: #f7f8fa;
+  --surface: #ffffff;
+  --surface-2: #eef0f4;
+  --text: #1a1f2b;
+  --text-2: #6a7385;
+  --border: #e4e7ee;
+  --accent: #059669;
+  --accent-text: #047857;
+  --accent-soft: rgba(5, 150, 105, 0.09);
+  --danger: #dc2626;
+  --danger-soft: rgba(220, 38, 38, 0.08);
+  --warn: #b45309;
+  --shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+  --ring: rgba(5, 150, 105, 0.4);
+  --font:
+    "TT Interphases Pro", "TT Interphases Pro Variable", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Inter, Roboto, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1522;
+    --surface: #1a2233;
+    --surface-2: #242f45;
+    --text: #e6ebf4;
+    --text-2: #8f9bb0;
+    --border: #2a3550;
+    --accent: #34d399;
+    --accent-text: #34d399;
+    --accent-soft: rgba(52, 211, 153, 0.1);
+    --danger: #f87171;
+    --danger-soft: rgba(248, 113, 113, 0.1);
+    --warn: #fbbf24;
+    --shadow: none;
+    --ring: rgba(52, 211, 153, 0.45);
+  }
+}
