@@ -43,27 +43,29 @@ function pingClass(r: PingStatus): string {
       <span class="proxy-sub">{SCHEME_LABELS[proxy.scheme]} · {proxy.host}:{proxy.port}</span>
     </span>
     <span class="ping {pingClass(status)}">{pingLabel(status)}</span>
-    <span
-      class="row-action"
-      role="button"
-      tabindex="0"
-      title={t('editAria', { name: proxyTitle(proxy) })}
-      aria-label={t('editAria', { name: proxyTitle(proxy) })}
-      onclick={edit}
-      onkeydown={(e) => e.key === 'Enter' && edit(e)}
-    >
-      <Icon name="pencil" size={14} />
-    </span>
-    <span
-      class="row-action danger"
-      role="button"
-      tabindex="0"
-      title={t('deleteAria', { name: proxyTitle(proxy) })}
-      aria-label={t('deleteAria', { name: proxyTitle(proxy) })}
-      onclick={remove}
-      onkeydown={(e) => e.key === 'Enter' && remove(e)}
-    >
-      <Icon name="trash" size={14} />
-    </span>
+    <div class="row-actions">
+      <span
+        class="row-action"
+        role="button"
+        tabindex="0"
+        title={t('editAria', { name: proxyTitle(proxy) })}
+        aria-label={t('editAria', { name: proxyTitle(proxy) })}
+        onclick={edit}
+        onkeydown={(e) => e.key === 'Enter' && edit(e)}
+      >
+        <Icon name="pencil" size={14} />
+      </span>
+      <span
+        class="row-action danger"
+        role="button"
+        tabindex="0"
+        title={t('deleteAria', { name: proxyTitle(proxy) })}
+        aria-label={t('deleteAria', { name: proxyTitle(proxy) })}
+        onclick={remove}
+        onkeydown={(e) => e.key === 'Enter' && remove(e)}
+      >
+        <Icon name="trash" size={14} />
+      </span>
+    </div>
   </button>
 </li>

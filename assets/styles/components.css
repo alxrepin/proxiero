@@ -220,6 +220,9 @@ main {
 .ping.dead {
   color: var(--danger);
 }
+.row-actions {
+  display: flex;
+}
 .row-action {
   flex: none;
   color: var(--text-2);
