@@ -19,7 +19,7 @@ select:focus-visible {
 
 @media (prefers-reduced-motion: reduce) {
   * {
-    /* biome-ignore lint/complexity/noImportantStyles */
+    /* biome-ignore lint/complexity/noImportantStyles: override all transitions for reduced motion */
     transition: none !important;
   }
 }
