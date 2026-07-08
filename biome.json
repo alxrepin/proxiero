@@ -2,7 +2,15 @@
   "$schema": "https://biomejs.dev/schemas/2.5.2/schema.json",
   "vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": false },
   "files": {
-    "includes": ["**", "!.output", "!.wxt", "!node_modules", "!public", "!package-lock.json"]
+    "includes": [
+      "**",
+      "!.output",
+      "!.wxt",
+      "!node_modules",
+      "!public",
+      "!coverage",
+      "!package-lock.json"
+    ]
   },
   "formatter": {
     "enabled": true,

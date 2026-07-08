@@ -1,6 +1,7 @@
 node_modules/
 .output/
 .wxt/
+coverage/
 .idea/
 .vscode/
 stats.html
