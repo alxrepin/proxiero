@@ -2,7 +2,7 @@
   "name": "proxiero",
   "description": "One-click proxy switching extension for Chrome, Firefox and Zen Browser",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "author": "Alex Repin <alxrepin@gmail.com>",
   "license": "MIT",
