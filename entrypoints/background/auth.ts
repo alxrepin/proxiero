@@ -4,36 +4,40 @@ type AuthDetails = { requestId: string; isProxy: boolean };
 type AuthListener = (
   details: AuthDetails,
   asyncCallback?: (response: object) => void,
-) => object | undefined;
+) => object | Promise<object> | undefined;
 
 export function setupProxyAuth(ctx: BgContext): void {
   const attempts = new Map<string, number>();
 
-  const onAuthRequired: AuthListener = (details, asyncCallback) => {
-    const respond = (r: object): object | undefined => {
-      if (asyncCallback) {
-        asyncCallback(r);
-        return undefined;
-      }
-      return r;
-    };
+  const decide = async (details: AuthDetails): Promise<object> => {
+    await ctx.ready;
     const p = ctx.activeProxy();
-    if (!details.isProxy || !p?.username) return respond({});
+    if (!details.isProxy || !p?.username) return {};
     const attempt = (attempts.get(details.requestId) ?? 0) + 1;
     attempts.set(details.requestId, attempt);
 
-    if (attempt > 2) return respond({ cancel: true });
-    return respond({
-      authCredentials: { username: p.username, password: p.password ?? '' },
-    });
+    if (attempt > 2) return { cancel: true };
+    return { authCredentials: { username: p.username, password: p.password ?? '' } };
   };
 
-  const addAuthListener = browser.webRequest.onAuthRequired.addListener as unknown as (
-    cb: AuthListener,
-    filter: { urls: string[] },
-    extraInfoSpec: string[],
-  ) => void;
-  addAuthListener(onAuthRequired, { urls: ['<all_urls>'] }, [
+  const onAuthRequired: AuthListener = (details, asyncCallback) => {
+    const result = decide(details);
+    if (asyncCallback) {
+      void result.then(asyncCallback);
+      return undefined;
+    }
+
+    return result;
+  };
+
+  const onAuthRequiredEvent = browser.webRequest.onAuthRequired as unknown as {
+    addListener(
+      cb: AuthListener,
+      filter: { urls: string[] },
+      extraInfoSpec: string[],
+    ): void;
+  };
+  onAuthRequiredEvent.addListener(onAuthRequired, { urls: ['<all_urls>'] }, [
     import.meta.env.FIREFOX ? 'blocking' : 'asyncBlocking',
   ]);
 

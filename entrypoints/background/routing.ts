@@ -59,10 +59,10 @@ export async function applyChromeProxy(ctx: BgContext): Promise<void> {
   const { settings } = proxyApi();
   const p = ctx.activeProxy();
   if (!p) {
-    await settings.clear({ scope: 'regular' });
+    await settings.clear.call(settings, { scope: 'regular' });
     return;
   }
-  await settings.set({
+  await settings.set.call(settings, {
     value: {
       mode: 'fixed_servers',
       rules: {
