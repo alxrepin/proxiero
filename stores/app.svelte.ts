@@ -1,5 +1,5 @@
 import { DEFAULT_STATE, loadState, saveState } from '@/utils/storage';
-import type { AppState, ProxyEntry } from '@/utils/types';
+import type { AppState, ProxyEntry, SplitMode } from '@/utils/types';
 
 const state = $state<AppState>({ ...DEFAULT_STATE });
 
@@ -19,9 +19,33 @@ export const app = {
   get isOn() {
     return state.enabled && this.active !== null;
   },
+  get splitEnabled() {
+    return state.splitEnabled;
+  },
+  get splitMode() {
+    return state.splitMode;
+  },
+  get splitDomains() {
+    return state.splitDomains;
+  },
 
   async init(): Promise<void> {
     Object.assign(state, await loadState());
+  },
+
+  async setSplitEnabled(value: boolean): Promise<void> {
+    state.splitEnabled = value;
+    await saveState({ splitEnabled: value });
+  },
+
+  async setSplitMode(mode: SplitMode): Promise<void> {
+    state.splitMode = mode;
+    await saveState({ splitMode: mode });
+  },
+
+  async setSplitDomains(domains: string[]): Promise<void> {
+    state.splitDomains = domains;
+    await saveState({ splitDomains: $state.snapshot(domains) });
   },
 
   async toggle(): Promise<boolean> {

@@ -1,9 +1,16 @@
 import { DEFAULT_STATE, loadState } from '@/utils/storage';
-import type { AppState, ProxyEntry } from '@/utils/types';
+import type { AppState, ProxyEntry, SplitMode } from '@/utils/types';
+
+export interface SplitConfig {
+  enabled: boolean;
+  mode: SplitMode;
+  domains: string[];
+}
 
 export interface BgContext {
   ready: Promise<void>;
   activeProxy(): ProxyEntry | null;
+  splitConfig(): SplitConfig;
   onStateChange(cb: () => void): void;
 }
 
@@ -32,6 +39,13 @@ export function createBgContext(): BgContext {
     activeProxy() {
       if (!state.enabled || !state.activeId) return null;
       return state.proxies.find((p) => p.id === state.activeId) ?? null;
+    },
+    splitConfig() {
+      return {
+        enabled: state.splitEnabled ?? false,
+        mode: state.splitMode,
+        domains: state.splitDomains ?? [],
+      };
     },
     onStateChange(cb) {
       listeners.push(cb);

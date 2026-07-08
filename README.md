@@ -24,6 +24,7 @@ and have it survive browser restarts.
 ## Features
 
 - **Server list** — HTTP, HTTPS, SOCKS4, SOCKS5, with optional username/password auth.
+- **Split tunneling** — route only chosen domains through the proxy (whitelist), or everything except them (blacklist). A domain matches all its subdomains.
 - **Latency check** — every server is pinged when the popup opens; status and ms shown inline.
 - **Survives restarts** — state is stored locally and re-applied on browser startup.
 - **Smart paste** — drop `socks5://user:pass@1.2.3.4:1080` into the address field and it splits itself into fields.
@@ -72,6 +73,7 @@ script listens for `storage.onChanged` and applies it:
 | Routing | `chrome.proxy.settings` (`fixed_servers`) | `proxy.onRequest` — per-request decision, no private-window permission needed |
 | Auth | `webRequest.onAuthRequired` (`asyncBlocking`) | same, `blocking`; SOCKS5 credentials go directly into `proxyInfo` |
 | Local traffic | `bypassList` | hostname check in the handler |
+| Split tunneling | generated `pac_script` when a domain list is set | per-host check in `proxy.onRequest` |
 | Restart | `runtime.onStartup` re-applies the saved state | same |
 
 ### Project structure
@@ -91,7 +93,7 @@ stores/                  # reactive state built on Svelte 5 runes
   app.svelte.ts          #   proxies / active / enabled + actions
   form.svelte.ts         #   form fields, draft, edit mode
   pings.svelte.ts        #   ping statuses
-utils/                   # pure modules: types, storage IO, ping, parsing, i18n
+utils/                   # pure modules: types, storage IO, ping, parsing, i18n, split-tunneling
 assets/styles/           # tokens (themes), base, per-component styles, fonts
 locales/                 # UI dictionaries (en, ru)
 scripts/gen-icons.mjs    # dependency-free PNG icon generator

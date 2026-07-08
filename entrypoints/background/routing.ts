@@ -1,3 +1,4 @@
+import { buildPacScript, shouldProxyHost } from '@/utils/split';
 import type { BgContext } from './context';
 
 interface FirefoxProxyInfo {
@@ -24,13 +25,16 @@ interface ProxyApi {
 
 const proxyApi = () => (browser as unknown as { proxy: ProxyApi }).proxy;
 
-function isLocalUrl(url: string): boolean {
+function hostname(url: string): string | null {
   try {
-    const host = new URL(url).hostname;
-    return host === 'localhost' || host === '127.0.0.1' || host === '[::1]';
+    return new URL(url).hostname;
   } catch {
-    return false;
+    return null;
   }
+}
+
+function isLocalHost(host: string): boolean {
+  return host === 'localhost' || host === '127.0.0.1' || host === '[::1]';
 }
 
 export function setupFirefoxRouting(ctx: BgContext): void {
@@ -38,7 +42,10 @@ export function setupFirefoxRouting(ctx: BgContext): void {
     async (details) => {
       await ctx.ready;
       const p = ctx.activeProxy();
-      if (!p || isLocalUrl(details.url)) return { type: 'direct' };
+      const host = hostname(details.url);
+      if (!p || !host || isLocalHost(host)) return { type: 'direct' };
+      const { enabled, mode, domains } = ctx.splitConfig();
+      if (enabled && !shouldProxyHost(host, mode, domains)) return { type: 'direct' };
       if (p.scheme === 'socks5' || p.scheme === 'socks4') {
         return {
           type: p.scheme === 'socks5' ? 'socks' : 'socks4',
@@ -60,6 +67,17 @@ export async function applyChromeProxy(ctx: BgContext): Promise<void> {
   const p = ctx.activeProxy();
   if (!p) {
     await settings.clear.call(settings, { scope: 'regular' });
+    return;
+  }
+  const { enabled, mode, domains } = ctx.splitConfig();
+  if (enabled && domains.length > 0) {
+    await settings.set.call(settings, {
+      value: {
+        mode: 'pac_script',
+        pacScript: { data: buildPacScript(p, mode, domains) },
+      },
+      scope: 'regular',
+    });
     return;
   }
   await settings.set.call(settings, {

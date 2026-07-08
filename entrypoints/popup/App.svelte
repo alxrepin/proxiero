@@ -3,6 +3,7 @@ import { onMount } from 'svelte';
 import AboutView from '@/components/AboutView.svelte';
 import FormView from '@/components/FormView.svelte';
 import ListView from '@/components/ListView.svelte';
+import SplitView from '@/components/SplitView.svelte';
 import { app } from '@/stores/app.svelte';
 import { form, formActions } from '@/stores/form.svelte';
 import { pings } from '@/stores/pings.svelte';
@@ -27,6 +28,8 @@ $effect(() => {
 <main>
   {#if ui.about}
     <AboutView />
+  {:else if ui.split}
+    <SplitView />
   {:else if form.visible}
     <FormView />
   {:else}

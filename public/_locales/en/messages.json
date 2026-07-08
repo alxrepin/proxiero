@@ -1,6 +1,6 @@
 {
   "extName": { "message": "Proxiero" },
   "extDescription": {
-    "message": "Quick proxy switching: one click, server list, ping check and auto-restore after browser restart."
+    "message": "Quick proxy switching: one-click toggle, server list, ping check, split tunneling and auto-restore after restart."
   }
 }

@@ -31,11 +31,7 @@ export function setupProxyAuth(ctx: BgContext): void {
   };
 
   const onAuthRequiredEvent = browser.webRequest.onAuthRequired as unknown as {
-    addListener(
-      cb: AuthListener,
-      filter: { urls: string[] },
-      extraInfoSpec: string[],
-    ): void;
+    addListener(cb: AuthListener, filter: { urls: string[] }, extraInfoSpec: string[]): void;
   };
   onAuthRequiredEvent.addListener(onAuthRequired, { urls: ['<all_urls>'] }, [
     import.meta.env.FIREFOX ? 'blocking' : 'asyncBlocking',

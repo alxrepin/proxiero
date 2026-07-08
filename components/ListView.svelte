@@ -24,6 +24,14 @@ import { t } from '@/utils/i18n.svelte';
     </button>
     <button
       class="icon-btn"
+      onclick={() => (ui.split = true)}
+      aria-label={t('splitTitle')}
+      title={t('splitTitle')}
+    >
+      <Icon name="settings" />
+    </button>
+    <button
+      class="icon-btn"
       onclick={() => (ui.about = true)}
       aria-label={t('help')}
       title={t('help')}

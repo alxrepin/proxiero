@@ -4,6 +4,9 @@ export const DEFAULT_STATE: AppState = {
   proxies: [],
   activeId: null,
   enabled: false,
+  splitEnabled: false,
+  splitMode: 'blacklist',
+  splitDomains: [],
 };
 
 export async function loadState(): Promise<AppState> {
