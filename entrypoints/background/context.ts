@@ -15,7 +15,7 @@ export interface BgContext {
 }
 
 export function createBgContext(): BgContext {
-  let state: AppState = DEFAULT_STATE;
+  let state: AppState = { ...DEFAULT_STATE };
   const listeners: Array<() => void> = [];
 
   const ready = loadState().then((s) => {

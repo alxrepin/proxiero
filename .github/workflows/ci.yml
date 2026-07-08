@@ -25,6 +25,9 @@ jobs:
       - name: Type check (svelte-check)
         run: npm run check
 
+      - name: Unit tests (Vitest)
+        run: npm run test
+
       - name: Build Chrome (MV3)
         run: npm run build
 
